@@ -7,6 +7,7 @@ const burger = document.querySelector('.burger');
 
 let isCatClicked = false;
 let isBurgerClicked = false;
+
 let currentRoom = "LivingRoom";
 
 class Tamagochis {
