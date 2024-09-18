@@ -1,0 +1,11 @@
+<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 100 100" width="200" height="200">
+    <!-- Circle for the face -->
+    <circle cx="50" cy="50" r="45" fill="yellow" stroke="black" stroke-width="2"/>
+
+    <!-- Eyes -->
+    <circle cx="35" cy="40" r="7" fill="black"/>
+    <circle cx="65" cy="40" r="7" fill="black"/>
+
+    <!-- Neutral mouth -->
+    <line x1="35" y1="65" x2="65" y2="65" stroke="black" stroke-width="3" stroke-linecap="round"/>
+</svg>

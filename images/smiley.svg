@@ -1,0 +1,11 @@
+<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 100 100" width="200" height="200">
+    <!-- Cercle du visage -->
+    <circle cx="50" cy="50" r="45" fill="yellow" stroke="black" stroke-width="2"/>
+
+    <!-- Yeux -->
+    <circle cx="35" cy="40" r="7" fill="black"/>
+    <circle cx="65" cy="40" r="7" fill="black"/>
+
+    <!-- Bouche souriante -->
+    <path d="M 35 60 Q 50 75 65 60" stroke="black" stroke-width="4" fill="transparent" stroke-linecap="round"/>
+</svg>

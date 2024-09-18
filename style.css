@@ -1,0 +1,113 @@
+body {
+    font-family: Arial, sans-serif;
+    background-color: #f0f8ff;
+    color: #333;
+    text-align: center;
+    margin: 0;
+    padding: 0;
+}
+
+main {
+    background: url(images/living-room.webp) no-repeat;
+    height: 100vh;
+    width: 1024px;
+    margin: 0 auto;
+    position: relative;
+    overflow: hidden;
+}
+main.kitchen {
+    background: url(images/kitchen.webp) no-repeat;
+}
+
+
+.tamagochi-stats {
+    position: absolute;
+    bottom: 50px;
+    width: 100%;
+    z-index: 999;
+    display: flex;
+    justify-content: center;
+    gap: 28px;
+}
+
+.stat {
+    border: 2px solid black;
+    border-radius: 50%;
+    background-color: white;
+    height: 100px;
+    width: 100px;
+    margin: 10px 0;
+    position: relative;
+    cursor: pointer;
+    overflow: hidden;
+}
+.stat.red {
+    background-color: red;
+}
+
+.logo {
+	width: 50px;
+	height: 50px;
+    position: absolute;
+    left: 50%;
+    top: 50%;
+    transform: translate(-50%, -50%);
+}
+
+.percentage {
+    position: absolute;
+    bottom: 0;
+    left: 0;
+    background-color: #C6F12A;
+    height: 50px;
+    width: 100%;
+}
+
+.label {
+    font-weight: bold;
+}
+
+.value {
+    color: #4a90e2;
+}
+
+.actions button {
+    background-color: #4a90e2;
+    border: none;
+    color: #fff;
+    padding: 10px 20px;
+    margin: 5px;
+    border-radius: 5px;
+    cursor: pointer;
+    font-size: 1em;
+}
+
+.actions button:hover {
+    background-color: #357abd;
+}
+
+.wrappeur-tom {
+    position: absolute;
+    bottom: 0;
+    right: 63px;
+}
+.wrappeur-tom.kitchen {
+    position: absolute;
+    bottom: 249px;
+    right: 265px;
+}
+
+.cat-tom {
+    cursor: pointer;
+}
+
+.burger {
+    position: fixed;
+    left: 50%;
+    bottom: 70px;
+    transform: translate(-50%, -50%);
+}
+
+.hidden {
+    display: none;
+}
