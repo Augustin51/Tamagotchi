@@ -5,6 +5,7 @@ body {
     text-align: center;
     margin: 0;
     padding: 0;
+    user-select: none;
 }
 
 main {
@@ -101,6 +102,16 @@ main.kitchen {
     cursor: pointer;
 }
 
+.tom-mouth {
+    width: 140px;
+    height: 80px;
+    position: absolute;
+    top: 130px;
+    left: 50%;
+    transform: translateX(-50%);
+    z-index: 999;
+}
+
 .burger {
     position: fixed;
     left: 50%;
@@ -108,6 +119,19 @@ main.kitchen {
     transform: translate(-50%, -50%);
 }
 
+.burger.annimation {
+    animation: burger 1s;
+}
+
 .hidden {
     display: none;
+}
+
+@keyframes burger {
+    from {
+        height: auto;
+    }
+    to {
+        height: 0;
+    }
 }

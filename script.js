@@ -3,11 +3,11 @@ const cutleryLogo = document.querySelector('.logo-cutlery');
 const moonLogo = document.querySelector('.logo-moon');
 const catTomWrappeur = document.querySelector('.wrappeur-tom');
 const catTom = document.querySelector('.cat-tom');
+const mouthTom = document.querySelector('.tom-mouth');
 const burger = document.querySelector('.burger');
 
 let isCatClicked = false;
 let isBurgerClicked = false;
-
 let currentRoom = "LivingRoom";
 
 class Tamagochis {
@@ -100,20 +100,19 @@ catTomWrappeur.addEventListener('mousemove', () => {
 smileyLogo.addEventListener('click', goLivingRoom);
 cutleryLogo.addEventListener('click', goKitchen);
 
+burger.addEventListener('click', () => isBurgerClicked = true);
 document.addEventListener('mousemove', (e) => {
 	if(isBurgerClicked) {
 		burger.style.left = e.clientX + 'px';
 		burger.style.top = e.clientY + 'px';
 	}
 });
-
-burger.addEventListener('click', () => isBurgerClicked = true);
-catTomWrappeur.addEventListener('click', () => {
+mouthTom.addEventListener('click', () => {
 	if(isBurgerClicked) {
 		myTamagochi.goEat();
+		burger.removeAttribute('style');
+		isBurgerClicked = false;
 	}
 })
-
-
 
 setInterval(() => myTamagochi.loss(), 1000);
