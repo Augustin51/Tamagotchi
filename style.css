@@ -9,15 +9,20 @@ body {
 }
 
 main {
-    background: url(images/living-room.webp) no-repeat;
     height: 100vh;
     width: 1024px;
     margin: 0 auto;
     position: relative;
     overflow: hidden;
 }
+main.living-room {
+    background: url(images/living-room.webp) no-repeat;
+}
 main.kitchen {
     background: url(images/kitchen.webp) no-repeat;
+}
+main.bedroom {
+    background: url(images/bedroom.webp) no-repeat;
 }
 
 
@@ -87,15 +92,20 @@ main.kitchen {
     background-color: #357abd;
 }
 
-.wrappeur-tom {
+.wrappeur-tom.living-room{
     position: absolute;
     bottom: 0;
     right: 63px;
 }
 .wrappeur-tom.kitchen {
     position: absolute;
-    bottom: 249px;
+    bottom: 215px;
     right: 265px;
+}
+.wrappeur-tom.bedroom {
+    position: absolute;
+    bottom: 225px;
+    right: 312px;
 }
 
 .cat-tom {
@@ -125,13 +135,4 @@ main.kitchen {
 
 .hidden {
     display: none;
-}
-
-@keyframes burger {
-    from {
-        height: auto;
-    }
-    to {
-        height: 0;
-    }
 }

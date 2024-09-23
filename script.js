@@ -1,14 +1,14 @@
-const smileyLogo = document.querySelector('.logo-smiley');
-const cutleryLogo = document.querySelector('.logo-cutlery');
-const moonLogo = document.querySelector('.logo-moon');
+const main = document.querySelector('main');
 const catTomWrappeur = document.querySelector('.wrappeur-tom');
 const catTom = document.querySelector('.cat-tom');
 const mouthTom = document.querySelector('.tom-mouth');
 const burger = document.querySelector('.burger');
+const changeRoomBtn = document.querySelectorAll('.change-room-btn');
+
 
 let isCatClicked = false;
 let isBurgerClicked = false;
-let currentRoom = "LivingRoom";
+let roomArr = ['living-room', 'kitchen', 'bedroom'];
 
 class Tamagochis {
 	constructor() {
@@ -37,12 +37,12 @@ class Tamagochis {
 			})
 			if (this.mood < 50) {
 				if (this.mood < 20) {
-					smileyLogo.src = './images/smiley-bad.svg';
+					document.querySelector('.logo-smiley').src = './images/living-room-bad.svg';
 				} else {
-					smileyLogo.src = './images/smiley-neutral.svg';
+					document.querySelector('.logo-smiley').src = './images/living-room-neutral.svg';
 				}
 			} else {
-				smileyLogo.src = './images/smiley.svg';
+				document.querySelector('.logo-smiley').src = './images/living-room.svg';
 			}
 		}
 
@@ -72,47 +72,44 @@ class Tamagochis {
 }
 let myTamagochi = new Tamagochis();
 
-function goKitchen() {
-	currentRoom = "Kitchen";
-	document.querySelector('main').classList.add('kitchen');
-	catTomWrappeur.classList.add('kitchen');
-	catTom.src = "./images/tom-sat.png";
-	burger.classList.remove('hidden');
+function changeRoom(room) {
+	for (let i = 0; i < roomArr.length; i++) {
+		main.classList.remove(roomArr[i]);
+		catTomWrappeur.classList.remove(roomArr[i]);
+	}
+	main.classList.add(room);
+	catTom.src = `images/tom-${room}.png`;
+	catTomWrappeur.classList.add(room);
+	room == 'kitchen' ? burger.classList.remove('hidden') : burger.classList.add('hidden');
 }
-
-function goLivingRoom() {
-	currentRoom = "LivingRoom";
-	document.querySelector('main').classList.remove('kitchen');
-	catTomWrappeur.classList.remove('kitchen');
-	catTom.src = "./images/tom1.png";
-	burger.classList.add('hidden');
-}
-
 
 catTomWrappeur.addEventListener('mousedown', () => isCatClicked = true);
 document.addEventListener('mouseup', () => isCatClicked = false);
 catTomWrappeur.addEventListener('mousemove', () => {
-	if (isCatClicked && currentRoom === "LivingRoom") {
+	if (isCatClicked) {
 		myTamagochi.goPlay();
 	}
 });
 
-smileyLogo.addEventListener('click', goLivingRoom);
-cutleryLogo.addEventListener('click', goKitchen);
+changeRoomBtn.forEach((room) => room.addEventListener('click', () => changeRoom(room.id)))
 
-burger.addEventListener('click', () => isBurgerClicked = true);
+burger.addEventListener('mousedown', () => isBurgerClicked = true);
 document.addEventListener('mousemove', (e) => {
-	if(isBurgerClicked) {
+	if (isBurgerClicked) {
 		burger.style.left = e.clientX + 'px';
 		burger.style.top = e.clientY + 'px';
 	}
 });
-mouthTom.addEventListener('click', () => {
-	if(isBurgerClicked) {
+mouthTom.addEventListener('mouseup', () => {
+	if (isBurgerClicked) {
 		myTamagochi.goEat();
 		burger.removeAttribute('style');
 		isBurgerClicked = false;
 	}
+})
+document.addEventListener('mouseup', () => {
+	burger.removeAttribute('style');
+	isBurgerClicked = false;
 })
 
 setInterval(() => myTamagochi.loss(), 1000);
