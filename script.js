@@ -4,19 +4,27 @@ const catTom = document.querySelector('.cat-tom');
 const mouthTom = document.querySelector('.tom-mouth');
 const burger = document.querySelector('.burger');
 const changeRoomBtn = document.querySelectorAll('.change-room-btn');
+const ligth = document.querySelector('.ligth');
 
-
+let currentRoom = 'living-room';
 let isCatClicked = false;
 let isBurgerClicked = false;
-let roomArr = ['living-room', 'kitchen', 'bedroom'];
+let isLigthActive = false;
+let intervalIdPlay;
+let intervalIdEat;
+let intervalIdSleep;
+let intervalIdLigth;
+
+let roomArr = ['living-room', 'kitchen', 'pee', 'bedroom'];
 
 class Tamagochis {
 	constructor() {
 		this.mood = 50;
 		this.hunger = 50;
+		this.pee = 50;
 		this.sleep = 50;
 
-		const properties = ['mood', 'hunger', 'sleep'];
+		const properties = ['mood', 'hunger', 'pee', 'sleep'];
 
 		this.verification = () => {
 			properties.forEach(property => {
@@ -52,18 +60,31 @@ class Tamagochis {
 			this.display();
 		}
 		this.goToSleep = () => {
-			this.sleep += 50;
+			this.sleep += 10;
+			this.verification();
+			this.display();
+		}
+		this.goPee = () => {
+			this.pee += 10;
 			this.verification();
 			this.display();
 		}
 		this.goPlay = () => {
-			this.mood += 0.1;
+			this.mood += 0.3;
 			this.verification();
 			this.display();
 		}
-		this.loss = () => {
+		this.lossEat = () => {
 			this.hunger -= 1;
+			this.verification();
+			this.display();
+		}
+		this.lossSleep = () => {
 			this.sleep -= 1;
+			this.verification();
+			this.display();
+		}
+		this.lossPlay = () => {
 			this.mood -= 1;
 			this.verification();
 			this.display();
@@ -73,25 +94,33 @@ class Tamagochis {
 let myTamagochi = new Tamagochis();
 
 function changeRoom(room) {
+	currentRoom = room;
 	for (let i = 0; i < roomArr.length; i++) {
 		main.classList.remove(roomArr[i]);
 		catTomWrappeur.classList.remove(roomArr[i]);
 	}
 	main.classList.add(room);
 	catTom.src = `images/tom-${room}.png`;
+	console.log(catTom.src)
 	catTomWrappeur.classList.add(room);
 	room == 'kitchen' ? burger.classList.remove('hidden') : burger.classList.add('hidden');
+	room == 'bedroom' ? ligth.classList.remove('hidden') : ligth.classList.add('hidden');
 }
 
 catTomWrappeur.addEventListener('mousedown', () => isCatClicked = true);
-document.addEventListener('mouseup', () => isCatClicked = false);
+document.addEventListener('mouseup', () => {
+	clearInterval(intervalIdPlay);
+	isCatClicked = false;
+	intervalIdPlay = setInterval(() => myTamagochi.lossPlay(), 1000);
+});
 catTomWrappeur.addEventListener('mousemove', () => {
-	if (isCatClicked) {
+	if (isCatClicked && currentRoom == 'living-room') {
+		clearInterval(intervalIdPlay);
 		myTamagochi.goPlay();
 	}
 });
 
-changeRoomBtn.forEach((room) => room.addEventListener('click', () => changeRoom(room.id)))
+changeRoomBtn.forEach((room) => room.addEventListener('click', () => changeRoom(room.id)));
 
 burger.addEventListener('mousedown', () => isBurgerClicked = true);
 document.addEventListener('mousemove', (e) => {
@@ -112,4 +141,20 @@ document.addEventListener('mouseup', () => {
 	isBurgerClicked = false;
 })
 
-setInterval(() => myTamagochi.loss(), 1000);
+ligth.addEventListener('click', () => {
+	isLigthActive ? isLigthActive = false : isLigthActive = true;
+	if(isLigthActive) {
+		clearInterval(intervalIdSleep)
+		intervalIdLigth = setInterval((() => myTamagochi.goToSleep()), 500);
+		ligth.classList.add('active');
+	} else {
+		clearInterval(intervalIdLigth)
+		intervalIdSleep = setInterval(() => myTamagochi.lossSleep(), 1000);
+		ligth.classList.remove('active');
+	}
+})
+
+
+intervalIdEat = setInterval(() => myTamagochi.lossEat(), 1000);
+intervalIdSleep = setInterval(() => myTamagochi.lossSleep(), 1000);
+intervalIdPlay = setInterval(() => myTamagochi.lossPlay(), 1000);
