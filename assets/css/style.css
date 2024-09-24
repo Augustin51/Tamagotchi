@@ -8,6 +8,17 @@ body {
     user-select: none;
 }
 
+body.nigth::after {
+    content: "";
+    background-color: rgba(0, 0, 0, 0.8);
+    position: fixed;
+    top: 0;
+    left: 50%;
+    transform: translateX(-50%);
+    width: 1024px;
+    height: 100vh;
+}
+
 main {
     height: 100vh;
     width: 1024px;
@@ -16,16 +27,16 @@ main {
     overflow: hidden;
 }
 main.living-room {
-    background: url(images/living-room.webp) no-repeat;
+    background: url(../images/living-room.webp) no-repeat;
 }
 main.kitchen {
-    background: url(images/kitchen.webp) no-repeat;
+    background: url(../images/kitchen.webp) no-repeat;
 }
 main.toilet {
-    background: url(images/toilet.webp) no-repeat;
+    background: url(../images/toilet.webp) no-repeat;
 }
 main.bedroom {
-    background: url(images/bedroom.webp) no-repeat;
+    background: url(../images/bedroom.webp) no-repeat;
 }
 
 
@@ -54,15 +65,16 @@ main.bedroom {
     background-color: red;
 }
 
-.ligth.active::after {
-    content: "";
-    background-color: rgba(0, 0, 0, 0.8);
-    position: fixed;
-    top: 0;
-    left: 50%;
-    transform: translateX(-50%);
-    width: 1024px;
-    height: 100vh;
+.ligth {
+    position: absolute;
+    top: -75px;
+    transform: translateX(15px);
+    width: 70px;
+    height: 70px;
+    border: 2px solid black;
+    cursor: pointer;
+    border-radius: 50%;
+    background-color: white;
 }
 
 .logo {
@@ -115,6 +127,12 @@ main.bedroom {
     position: absolute;
     bottom: 215px;
     right: 265px;
+}
+.wrappeur-tom.toilet {
+    position: absolute;
+    bottom: 0;
+    left: 50%;
+    transform: translateX(-50%);
 }
 .wrappeur-tom.bedroom {
     position: absolute;

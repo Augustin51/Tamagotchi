@@ -5,7 +5,7 @@
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title>Tamagotchi</title>
-    <link rel="stylesheet" href="./style.css">
+    <link rel="stylesheet" href="assets/css/style.css">
 </head>
 
 <body>
@@ -13,31 +13,33 @@
         <div class="tamagochi-stats">
             <div class="stat change-room-btn" id="living-room">
                 <div class="percentage"></div>
-                <img src="images/living-room.svg" alt="" class="logo logo-smiley">
+                <img src="assets/images/living-room.svg" alt="" class="logo logo-smiley">
             </div>
             <div class="stat change-room-btn" id="kitchen">
                 <div class="percentage"></div>
-                <img src="images/kitchen.svg" alt="" class="logo logo-cutlery">
+                <img src="assets/images/kitchen.svg" alt="" class="logo logo-cutlery">
             </div>
             <div class="stat change-room-btn" id="toilet">
                 <div class="percentage"></div>
-                <img src="images/toilet.svg" alt="" class="logo logo-cutlery">
+                <img src="assets/images/toilet.svg" alt="" class="logo logo-cutlery">
             </div>
-            <div class="stat change-room-btn" id="bedroom">
-                <div class="percentage"></div>
-                <img src="images/bedroom.svg" alt="" class="logo logo-moon">
-            </div>
-            <div class="stat ligth hidden">
-                <img src="images/ligth.png" alt="" class="logo">
+            <div class="wrapper-bedroom">
+                <div class="ligth hidden">
+                    <img src="assets/images/ligth.png" alt="" class="logo">
+                </div>
+                <div class="stat change-room-btn" id="bedroom">
+                    <div class="percentage"></div>
+                    <img src="assets/images/bedroom.svg" alt="" class="logo logo-moon">
+                </div>
             </div>
         </div>
         <div class="wrappeur-tom living-room">
-            <img src="images/tom-living-room.png" class="cat-tom" draggable="false" alt="cat Tom">
+            <img src="assets/images/tom-living-room.png" class="cat-tom" draggable="false" alt="cat Tom">
             <div class="tom-mouth"></div>
         </div>
-        <img src="images/burger.png" class="burger hidden" alt="burger" draggable="false">
+        <img src="assets/images/burger.png" class="burger hidden" alt="burger" draggable="false">
     </main>
-    <script src="script.js"></script>
+    <script src="assets/js/script.js"></script>
 </body>
 
 </html>

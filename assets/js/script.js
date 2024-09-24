@@ -1,3 +1,4 @@
+const body = document.querySelector('body');
 const main = document.querySelector('main');
 const catTomWrappeur = document.querySelector('.wrappeur-tom');
 const catTom = document.querySelector('.cat-tom');
@@ -12,10 +13,12 @@ let isBurgerClicked = false;
 let isLigthActive = false;
 let intervalIdPlay;
 let intervalIdEat;
+let intervalIdGoPee;
+let intervalIdLossPee;
 let intervalIdSleep;
 let intervalIdLigth;
 
-let roomArr = ['living-room', 'kitchen', 'pee', 'bedroom'];
+let roomArr = ['living-room', 'kitchen', 'toilet', 'bedroom'];
 
 class Tamagochis {
 	constructor() {
@@ -45,12 +48,12 @@ class Tamagochis {
 			})
 			if (this.mood < 50) {
 				if (this.mood < 20) {
-					document.querySelector('.logo-smiley').src = './images/living-room-bad.svg';
+					document.querySelector('.logo-smiley').src = 'assets/images/living-room-bad.svg';
 				} else {
-					document.querySelector('.logo-smiley').src = './images/living-room-neutral.svg';
+					document.querySelector('.logo-smiley').src = 'assets/images/living-room-neutral.svg';
 				}
 			} else {
-				document.querySelector('.logo-smiley').src = './images/living-room.svg';
+				document.querySelector('.logo-smiley').src = 'assets/images/living-room.svg';
 			}
 		}
 
@@ -60,12 +63,12 @@ class Tamagochis {
 			this.display();
 		}
 		this.goToSleep = () => {
-			this.sleep += 10;
+			this.sleep += 1;
 			this.verification();
 			this.display();
 		}
 		this.goPee = () => {
-			this.pee += 10;
+			this.pee += 1;
 			this.verification();
 			this.display();
 		}
@@ -76,6 +79,11 @@ class Tamagochis {
 		}
 		this.lossEat = () => {
 			this.hunger -= 1;
+			this.verification();
+			this.display();
+		}
+		this.lossPee = () => {
+			this.pee -= 1;
 			this.verification();
 			this.display();
 		}
@@ -100,11 +108,19 @@ function changeRoom(room) {
 		catTomWrappeur.classList.remove(roomArr[i]);
 	}
 	main.classList.add(room);
-	catTom.src = `images/tom-${room}.png`;
-	console.log(catTom.src)
+	catTom.src = `assets/images/tom-${room}.png`;
 	catTomWrappeur.classList.add(room);
 	room == 'kitchen' ? burger.classList.remove('hidden') : burger.classList.add('hidden');
 	room == 'bedroom' ? ligth.classList.remove('hidden') : ligth.classList.add('hidden');
+	if(room == 'toilet') {
+		clearInterval(intervalIdGoPee);
+		clearInterval(intervalIdLossPee);
+		intervalIdGoPee = setInterval(() => myTamagochi.goPee(), 100);
+	} else {
+		clearInterval(intervalIdGoPee);
+		clearInterval(intervalIdLossPee);
+		intervalIdLossPee = setInterval(() => myTamagochi.lossPee(), 1000);
+	}
 }
 
 catTomWrappeur.addEventListener('mousedown', () => isCatClicked = true);
@@ -135,26 +151,30 @@ mouthTom.addEventListener('mouseup', () => {
 		burger.removeAttribute('style');
 		isBurgerClicked = false;
 	}
-})
+});
 document.addEventListener('mouseup', () => {
 	burger.removeAttribute('style');
 	isBurgerClicked = false;
-})
-
+});
 ligth.addEventListener('click', () => {
 	isLigthActive ? isLigthActive = false : isLigthActive = true;
 	if(isLigthActive) {
 		clearInterval(intervalIdSleep)
-		intervalIdLigth = setInterval((() => myTamagochi.goToSleep()), 500);
-		ligth.classList.add('active');
-	} else {
+		intervalIdLigth = setInterval((() => myTamagochi.goToSleep()), 100);
+		body.classList.add('nigth');
+	}
+})
+document.addEventListener('click', () => {
+	isLigthActive ? isLigthActive = false : isLigthActive = true;
+	if(!isLigthActive) {
 		clearInterval(intervalIdLigth)
 		intervalIdSleep = setInterval(() => myTamagochi.lossSleep(), 1000);
-		ligth.classList.remove('active');
+		body.classList.remove('nigth');
 	}
 })
 
 
-intervalIdEat = setInterval(() => myTamagochi.lossEat(), 1000);
-intervalIdSleep = setInterval(() => myTamagochi.lossSleep(), 1000);
 intervalIdPlay = setInterval(() => myTamagochi.lossPlay(), 1000);
+intervalIdEat = setInterval(() => myTamagochi.lossEat(), 1000);
+intervalIdLossPee = setInterval(() => myTamagochi.lossPee(), 1000);
+intervalIdSleep = setInterval(() => myTamagochi.lossSleep(), 1000);
