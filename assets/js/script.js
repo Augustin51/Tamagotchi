@@ -15,8 +15,8 @@ let intervalIdPlay;
 let intervalIdEat;
 let intervalIdGoPee;
 let intervalIdLossPee;
-let intervalIdSleep;
-let intervalIdLigth;
+let intervalIdGoSleep;
+let intervalIdLossSleep;
 
 let roomArr = ['living-room', 'kitchen', 'toilet', 'bedroom'];
 
@@ -102,6 +102,8 @@ class Tamagochis {
 let myTamagochi = new Tamagochis();
 
 function changeRoom(room) {
+	if(isLigthActive) return
+	
 	currentRoom = room;
 	for (let i = 0; i < roomArr.length; i++) {
 		main.classList.remove(roomArr[i]);
@@ -159,16 +161,14 @@ document.addEventListener('mouseup', () => {
 ligth.addEventListener('click', () => {
 	isLigthActive ? isLigthActive = false : isLigthActive = true;
 	if(isLigthActive) {
-		clearInterval(intervalIdSleep)
-		intervalIdLigth = setInterval((() => myTamagochi.goToSleep()), 100);
+		clearInterval(intervalIdGoSleep);
+		clearInterval(intervalIdLossSleep);
+		intervalIdGoSleep = setInterval(() => myTamagochi.goToSleep(), 100);
 		body.classList.add('nigth');
-	}
-})
-document.addEventListener('click', () => {
-	isLigthActive ? isLigthActive = false : isLigthActive = true;
-	if(!isLigthActive) {
-		clearInterval(intervalIdLigth)
-		intervalIdSleep = setInterval(() => myTamagochi.lossSleep(), 1000);
+	} else {
+		clearInterval(intervalIdGoSleep);
+		clearInterval(intervalIdLossSleep);
+		intervalIdLossSleep = setInterval(() => myTamagochi.lossSleep(), 1000);
 		body.classList.remove('nigth');
 	}
 })
@@ -177,4 +177,4 @@ document.addEventListener('click', () => {
 intervalIdPlay = setInterval(() => myTamagochi.lossPlay(), 1000);
 intervalIdEat = setInterval(() => myTamagochi.lossEat(), 1000);
 intervalIdLossPee = setInterval(() => myTamagochi.lossPee(), 1000);
-intervalIdSleep = setInterval(() => myTamagochi.lossSleep(), 1000);
+intervalIdLossSleep = setInterval(() => myTamagochi.lossSleep(), 1000);
